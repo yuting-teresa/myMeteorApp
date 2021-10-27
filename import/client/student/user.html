@@ -1,0 +1,86 @@
+<template name="user">
+	{{ > Template.dynamic template=userSession}}
+</template>
+
+<template name="userIndex">
+	<form>
+		<p>
+		    Name: <input type="text" id="name" required />	
+		</p>
+		<p>
+			Gender:
+			<input type="radio" name="gender" value="male" />
+			<label for="male">Male</label>
+			<input type="radio" name="gender" value="female" />
+			<label for="female">Female</label>
+			<input type="radio" name="gender" value="transgender" checked />
+			<label for="transgender">Transgender</label>
+        </p>
+        <p>
+        	Age:
+        	<input type="number" id="age" min="0" max="120" required />
+        </p>
+        <p>
+           <input type="submit" value="Submit"/>	
+           <input type="reset" value="Reset"/>
+        </p>
+	</form>
+	<button id="testFuncCall">Call Server Function</button>
+	<button id="printProfile">Print Profile</button>
+	<button id="vocab">Vocabulary Master</button>
+	<button id="writing">Writing Geek</button>
+</template>
+
+<template name="vocab">
+	<button>User Home</button>
+	<p>
+		Vocabulary Test
+	</p>
+	<form>
+		<p>
+		    Name: <input type="text" id="name" required />	
+		</p>
+
+		<p>1. Click the best synonym for "fed up":</P>
+		<input type="radio" name="choice1" value=0> 
+		<label for="in a hurry">in a hurry</label>
+		<input type="radio" name="choice1" value=0> 
+		<label for="having a full stomach">having a full stomach</label>
+		<input type="radio" name="choice1" value=1> 
+		<label for="out of patience">out of patience</label>
+		<input type="radio" name="choice1" value=0>
+		<label for="in charge">in charge</label>
+		<br>  
+		
+		<P>2. Click the best synonym for "break up": </P>
+		<input type="radio" name="choice2" value=1> 
+		<label for="end a relationship">end a relationship</label>
+      <input type="radio" name="choice2" value=0> 
+      <label for="have a good time">have a good time</label>
+      <input type="radio" name="choice2" value=0> 
+      <label for="build a fire">build a fire</label>
+      <input type="radio" name="choice2" value=0>
+      <label for="run out of money">run out of money</label>
+		<br>
+		
+		<P>3. Click the best synonym for "explode": </p>
+		<input type="radio" name="choice3" value=0> 
+		<label for="look around">look around</label>
+      <input type="radio" name="choice3" value=0> 
+      <label for="turn off">turn off</label>
+      <input type="radio" name="choice3" value=0> 
+      <label for="find out">find out</label>
+      <input type="radio" name="choice3" value=1>
+      <label for="blow up">blow up</label>
+		<br>
+      <p>
+           <input type="submit" value="Submit"/>
+      </p>
+	</form>	
+
+
+</template>
+
+<template name="writing">
+	<button>User Home</button>
+</template>

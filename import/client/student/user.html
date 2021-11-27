@@ -25,6 +25,17 @@
            <input type="reset" value="Reset"/>
         </p>
 	</form>
+	
+	<em>User Profile</em><br/>
+	Name:{{profileKey "name"}}<br/>
+	Type:{{profileKey "type"}}<br/>
+	Gender:{{profileKey "gender"}}<br/>
+	Age:{{profileKey "age"}}<br/>
+   Lecturer: {{profileKey "lecturer"}}<br/>
+
+   Assign to lecturer: <input type="text" id="lecturerName" />
+   <button id="assignLecturer">Assign</button><br/>
+
 	<button id="testFuncCall">Call Server Function</button>
 	<button id="printProfile">Print Profile</button>
 	<button id="vocab">Vocabulary Master</button>
@@ -33,54 +44,131 @@
 
 <template name="vocab">
 	<button>User Home</button>
-	<p>
+	<style>
+		body {
+			 margin-left: 10%;
+		}
+	</style>
+   
+	<h2>
 		Vocabulary Test
-	</p>
+	</h2>
 	<form>
 		<p>
 		    Name: <input type="text" id="name" required />	
 		</p>
 
-		<p>1. Click the best synonym for "fed up":</P>
+		<p>
+		<h3>1. Click the best synonym for "fed up":</h3>
 		<input type="radio" name="choice1" value=0> 
-		<label for="in a hurry">in a hurry</label>
+		<label for="in a hurry">in a hurry</label> <br>
 		<input type="radio" name="choice1" value=0> 
-		<label for="having a full stomach">having a full stomach</label>
+		<label for="having a full stomach">having a full stomach</label><br>
 		<input type="radio" name="choice1" value=1> 
-		<label for="out of patience">out of patience</label>
+		<label for="out of patience">out of patience</label><br>
 		<input type="radio" name="choice1" value=0>
-		<label for="in charge">in charge</label>
+		<label for="in charge">in charge</label><br>
+		</p>
 		<br>  
-		
-		<P>2. Click the best synonym for "break up": </P>
+		<p>
+		<h3>2. Click the best synonym for "break up": </h3>
 		<input type="radio" name="choice2" value=1> 
-		<label for="end a relationship">end a relationship</label>
+		<label for="end a relationship">end a relationship</label><br>
       <input type="radio" name="choice2" value=0> 
-      <label for="have a good time">have a good time</label>
+      <label for="have a good time">have a good time</label><br>
       <input type="radio" name="choice2" value=0> 
-      <label for="build a fire">build a fire</label>
+      <label for="build a fire">build a fire</label><br>
       <input type="radio" name="choice2" value=0>
-      <label for="run out of money">run out of money</label>
+      <label for="run out of money">run out of money</label><br>
+		</p>
 		<br>
 		
-		<P>3. Click the best synonym for "explode": </p>
+		<P>
+		<h3>3. Click the best synonym for "explode": </h3>
 		<input type="radio" name="choice3" value=0> 
-		<label for="look around">look around</label>
+		<label for="look around">look around</label><br>
       <input type="radio" name="choice3" value=0> 
-      <label for="turn off">turn off</label>
+      <label for="turn off">turn off</label><br>
       <input type="radio" name="choice3" value=0> 
-      <label for="find out">find out</label>
+      <label for="find out">find out</label><br>
       <input type="radio" name="choice3" value=1>
-      <label for="blow up">blow up</label>
+      <label for="blow up">blow up</label><br>
+		</P>
 		<br>
       <p>
            <input type="submit" value="Submit"/>
       </p>
 	</form>	
 
-
+           
 </template>
 
 <template name="writing">
+      <style>
+      	article{
+      		margin: 5px 0;
+      		background-color: green;
+      		color: white;
+      		font-family: Montserrat, sans-serif;
+         }
+      		article:hover{
+      			cursor: pointer;
+      	}
+
+      	section {
+      		margin: 3px 0;
+      		font-size: 70%;
+      	}
+      	section.student {
+      		background-color: blue;
+      	}
+        section.lecturer {
+        	background-color: crimson;
+        }
+      </style>
+    {{#each project in allProjects}}
+        <article id="{{project.title}}">
+            Title: {{project.title}} <br/>
+            Started At: {{project.startedAt}} <br/>
+            Open: {{project.open}}
+            {{#each writing in allWritings project.title}}
+               <section class="{{writing.userType}}" id="{{writing._id}}">
+               	Word Count: {{writing.wordCount}} <br/>
+               	Submitted at:{{writing.createdAt}} <br/>
+               	Last Edited at: {{writing.lastEditedAt}}
+               </section>
+
+            {{else}}
+            <form style="display: none;">
+            	<textarea style="width: 100%; height: 150px;" ></textarea><br/>
+            	<input type="submit" value="Submit" />
+            	<input type="reset" value="Reset" />
+            </form>
+            {{/each}}
+        </article>
+    {{/each}}
+
 	<button>User Home</button>
+</template>
+
+<template name="writingTools">
+	<style >
+		textarea {
+			width:  200px;
+			height: 100px;
+		}
+	</style>
+   <h2>Project Title: {{writingRec "project"}}</h2>
+   <h3>Writing ID: {{writingRec "_id"}} </h3>
+   <p>
+   	Body Texts:<br/>
+   	<textarea>{{writingRec "texts"}}</textarea><br/>
+   	Lecturer's comments: <br/>
+   	<textarea readonly>{{writingRec "comments"}}</textarea><br/>
+   	Time of Submission:{{writingRec "createdAt"}}<br/>
+   	Last Edited at:{{writingRec "lastEditedAt"}}
+   </p>
+   <button id="submitNew">Submit as a new entry</button>
+   <button id="save">Save changes</button>
+   <button id="backToProjects">Projects</button>
 </template>

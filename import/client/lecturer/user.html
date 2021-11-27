@@ -1,0 +1,69 @@
+<template name="user">
+    {{> Template.dynamic template=userSession}}
+</template>
+
+<template name="userIndex">
+    <form>
+    	Lecturer Name: <input type ="text" id="name" value="{{lecturer}}" /><br/>
+    	<input type="submit" value="submit" />
+    </form>
+    <p>
+    	Current student(s):
+        {{#each value in students}}
+             {{value}}, 
+        {{else}}
+            None.     
+        {{/each}}
+    </p>
+    Add student: <input type="text" id="studentName" />
+    <button id="addStudent">Add</button> <br/>
+    <button id="writing">Writing Geek</button>
+</template>
+
+<template name="writing">
+    <style>
+        article {
+            margin:  5px 0;
+            background-color: green;
+            color: white;
+            font-family: Montserrat, sans-serif;
+        }
+
+        article: hover {
+            cursor:  pointer;
+        }
+    </style>
+
+    Students:
+    <select>
+        <option value=""></option>
+        {{#each name in students}}
+            <option value="{{name}}">{{name}}</option>
+        {{/each}}
+    </select> <br/>
+       
+       <p>
+        Project Title:<input type="text" id="newProject" /> <br/>
+        Description:<input type="text" id="newDescription" />
+     <button id="addProject">Add a new project</button> <br/>
+        Project Title:
+        <select>
+        <option value=""></option>
+        {{#each project in studentWritings}}
+            <option value="{{projectTitle}}">{{projectTitle}}</option>
+        {{/each}}
+    </select> 
+        <button id="deleteProject">Delete a project</button>
+    </p>
+    
+    {{#each allProjects}}
+        <article>
+            Title: {{title}} <br/>
+            Description: {{description}} <br/>
+            Started At: {{startedAt}} <br/>
+            Open: {{open}}
+        </article>
+    {{/each}}
+    <button id="userIndex">Home</button>
+    
+</template>
